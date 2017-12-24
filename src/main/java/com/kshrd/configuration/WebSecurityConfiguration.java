@@ -6,6 +6,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -15,6 +16,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 
 	@Autowired
 	private AuthenticationSuccessHandler successHandler;
+	
+	@Autowired
+	private AuthenticationEntryPoint authenticationEntryPoint;
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -30,7 +34,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 		//enable form login
 		http.formLogin()
+			//custom login page
 			.loginPage("/login")
+			//custom success handler
 			.successHandler(successHandler);
 		
 		//logout
@@ -43,6 +49,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 			.antMatchers("/admin/**").hasAnyRole("ADMIN")
 			.antMatchers("/dba/**").hasAnyRole("ADMIN", "DBA")
 			.antMatchers("/user/**").hasAnyRole("ADMIN", "DBA", "USER");
+		
+		http.exceptionHandling()	
+			.authenticationEntryPoint(authenticationEntryPoint);
+		
+		
 	}
 	
 	

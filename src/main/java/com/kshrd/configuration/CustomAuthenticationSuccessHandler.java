@@ -24,17 +24,20 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
 		System.out.println(auth.getPrincipal());
 		System.out.println(auth.getAuthorities());
 		
-		String redirectUrl = "/index";
-		
-		for(GrantedAuthority authority: auth.getAuthorities()){
-			if(authority.getAuthority().contains("USER")){
-				redirectUrl = "/user/dashboard";
-			}
-			else if(authority.getAuthority().contains("DBA")){
-				redirectUrl = "/dba/dashboard";
-			}
-			else if(authority.getAuthority().contains("ADMIN")){
-				redirectUrl = "/admin/dashboard";
+		String redirectUrl = 
+				(String)request.getSession().getAttribute("REQUEST_URL");
+
+		if(redirectUrl == null){
+			for(GrantedAuthority authority: auth.getAuthorities()){
+				if(authority.getAuthority().contains("USER")){
+					redirectUrl = "/user/dashboard";
+				}
+				else if(authority.getAuthority().contains("DBA")){
+					redirectUrl = "/dba/dashboard";
+				}
+				else if(authority.getAuthority().contains("ADMIN")){
+					redirectUrl = "/admin/dashboard";
+				}
 			}
 		}
 		response.sendRedirect(redirectUrl);
