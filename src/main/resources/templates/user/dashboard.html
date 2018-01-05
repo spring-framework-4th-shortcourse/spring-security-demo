@@ -14,7 +14,13 @@
 	
 	<div sec:authorize="hasRole('ROLE_ADMIN')">
 		<ul>
-			<li><p>Only admin can see this!</p></li>
+			<li><p>This content is only available for user who has role ADMIN!</p></li>
+		</ul>
+	</div>
+	
+	<div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_DBA')">
+		<ul>
+			<li><p>This content is only available for user who have role ADMIN or DBA!</p></li>
 		</ul>
 	</div>
 	
