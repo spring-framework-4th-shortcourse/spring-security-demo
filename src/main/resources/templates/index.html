@@ -6,7 +6,10 @@
 <title>Home</title>
 </head>
 <body>
-	<h1>Welcome Home!</h1><hr/>
+
+	<h1 sec:authorize="isAuthenticated()">Welcome, <span sec:authentication="name"></span>!</h1>
+	<h1 sec:authorize="isAnonymous()">Welcome, Home!</h1>
+
 	<ul>
 		<li><a href="/admin/dashboard">Admin Page</a></li>
 		<li><a href="/dba/dashboard">Dba Page</a></li>
