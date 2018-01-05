@@ -2,10 +2,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1"/>
-<title>Home</title>
+<title>Admin</title>
 </head>
 <body>
-	<h1>Welcome ADMIN!</h1>
-	<a href="/logout">Logout</a>
+	<h1>Welcome, <span sec:authentication="name"></span>!</h1>
+	<ul>
+		<li>Roles: <span sec:authentication="principal.authorities"></span></li>
+		<li>Username: <span sec:authentication="principal.username"></span></li>
+	</ul>
+	<ul>
+		<li><a href="/">Back Home</a></li>
+	</ul>
 </body>
 </html>

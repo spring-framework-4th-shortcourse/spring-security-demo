@@ -1,11 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="ISO-8859-1"/>
 <title>Home</title>
 </head>
 <body>
-	<h1>Welcome User!</h1>
-	<a href="/logout">Logout</a>
+	<h1>Welcome, <span sec:authentication="name"></span>!</h1>
+	<ul>
+		<li>Roles: <span sec:authentication="principal.authorities"></span></li>
+		<li>Username: <span sec:authentication="principal.username"></span></li>
+	</ul>
+	
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<ul>
+			<li><p>Only admin can see this!</p></li>
+		</ul>
+	</div>
+	
+	<ul>
+		<li><a href="/">Back Home</a></li>
+	</ul>
 </body>
 </html>

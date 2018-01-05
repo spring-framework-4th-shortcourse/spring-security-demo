@@ -52,8 +52,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 		
 		http.exceptionHandling()	
 			.authenticationEntryPoint(authenticationEntryPoint);
-		
-		
 	}
 	
 	
