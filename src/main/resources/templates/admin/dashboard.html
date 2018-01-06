@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="ISO-8859-1"/>
-<title>Home</title>
+<title>Admin Page</title>
 </head>
 <body>
-	<h1>Welcome ADMIN!</h1>
-	<a href="/logout">Logout</a>
+	<h1>Welcome, <span sec:authentication="name"></span>!</h1>
+	<ul>
+		<li><a href="/">Home</a></li>
+	</ul>
 </body>
 </html>

@@ -1,14 +1,23 @@
 <!DOCTYPE html>
-<html>
+<html
+		xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="ISO-8859-1"/>
 <title>Home</title>
 </head>
 <body>
-	<h1>Welcome Home!</h1>
-	<a href="/admin/dashboard">Admin</a>
-	<a href="/dba/dashboard">Dba</a>
-	<a href="/user/dashboard">User</a>
-	<a href="/login">Login</a>
+	<h1>Welcome <span sec:authentication="name"></span>!</h1>
+	<ul>
+		<li><a href="/admin/dashboard">Admin</a></li>
+		<li><a href="/dba/dashboard">Dba</a></li>
+		<li><a href="/user/dashboard">User</a></li>
+	</ul>
+
+	<ul sec:authorize="isAnonymous()">
+		<li><a href="/login">Login</a></li>
+	</ul>
+	<ul sec:authorize="isAuthenticated()">
+		<li><a href="/logout">Logout</a></li>
+	</ul>
 </body>
 </html>

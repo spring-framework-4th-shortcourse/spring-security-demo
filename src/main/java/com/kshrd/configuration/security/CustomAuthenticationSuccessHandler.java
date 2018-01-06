@@ -1,4 +1,4 @@
-package com.kshrd.configuration;
+package com.kshrd.configuration.security;
 
 import java.io.IOException;
 
